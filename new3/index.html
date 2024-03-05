@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Reservation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message-box {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sign-up Page -->
+        <div id="signup-page">
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="Username" id="signup-username">
+            <input type="password" placeholder="Password" id="signup-password">
+            <input type="password" placeholder="Confirm Password" id="signup-confirm-password">
+            <button onclick="redirectToLoginPage()">Sign Up</button>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" style="display: none;">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" id="login-username">
+            <input type="password" placeholder="Password" id="login-password">
+            <button onclick="redirectToMainPage()">Login</button>
+        </div>
+
+        <!-- Main Page -->
+        <div id="main-page" style="display: none;">
+            <h2>Train Reservation</h2>
+            <input type="text" placeholder="Origin" id="origin">
+            <input type="text" placeholder="Destination" id="destination">
+            <input type="text" placeholder="Train Name" id="train-name">
+            <input type="number" placeholder="Passenger Seats" id="passenger-seats">
+            <input type="date" id="journey-date">
+            <div class="message-box" id="ticket-message"></div>
+            <button onclick="bookTicket()">Book the Ticket</button>
+        </div>
+
+        <!-- Summary Page -->
+        <div id="summary-page" style="display: none;">
+            <h2>Ticket Summary</h2>
+            <p>Origin: <span id="summary-origin"></span></p>
+            <p>Destination: <span id="summary-destination"></span></p>
+            <!-- Add other ticket details here -->
+        </div>
+    </div>
+
+    <script>
+        function redirectToLoginPage() {
+            document.getElementById("signup-page").style.display = "none";
+            document.getElementById("login-page").style.display = "block";
+        }
+
+        function redirectToMainPage() {
+            document.getElementById("login-page").style.display = "none";
+            document.getElementById("main-page").style.display = "block";
+        }
+
+        function bookTicket() {
+            // Get user-entered details and display ticket message
+            const origin = document.getElementById("origin").value;
+            const destination = document.getElementById("destination").value;
+            // Get other details (train name, passenger seats, date) similarly
+            const ticketMessage = `Ticket available for ${origin} to ${destination}.`;
+            document.getElementById("ticket-message").textContent = ticketMessage;
+
+            // Redirect to summary page
+            document.getElementById("main-page").style.display = "none";
+            document.getElementById("summary-page").style.display = "block";
+
+            // Display summary details (e.g., origin, destination) in summary page
+            document.getElementById("summary-origin").textContent = origin;
+            document.getElementById("summary-destination").textContent = destination;
+            // Add other summary details here
+        }
+    </script>
+</body>
+</html>
